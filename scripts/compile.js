@@ -19,7 +19,7 @@ function compileText (node, exp) {
     new Watcher(this.vm, exp, function (value) {  // 生成订阅器并绑定更新函数
         self.updateText(node, value);
     });
-},
+}
 
 function compileElement(el) {
     var childNodes = el.childNodes;
@@ -40,6 +40,6 @@ function compileElement(el) {
 
 
 }
-function (node, value) {
-    node.textContent = typeof value == 'undefined' ? '' : value;
-}
+// function (node, value) {
+//     node.textContent = typeof value == 'undefined' ? '' : value;
+// }

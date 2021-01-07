@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<p id="name"></p>
+<input type="text" id="inputText">
+
+<script>
+    var inp = document.querySelector('input');
+    var p = document.querySelector('p');
+
+    //发布订阅者对象
+    var obj = {};
+
+    //发布订阅事件列表
+    obj.list = {};
+
+    //订阅事件函数
+    obj.listen = function (eventName, fn) {
+        obj.list[eventName] = fn;
+
+    }
+
+    //发布事件函数
+    obj.trigger = function (eventName) {
+        obj.list[eventName]()
+
+    }
+
+    //数据
+    var data = {
+        str: 'hello'
+    }
+
+    var str = data.str;
+
+    //Object.defineProperty(obj, prop, descriptor)
+    //观察数据变动，触发订阅事件
+    /**
+     * obj:需要定义的当前对象
+     * prop:当前需要定义的参数（属性名）
+     * descriptor:属性描述符（对应的方法）
+     */
+    Object.defineProperty(data, 'str', {
+        get() {
+            return str
+        },
+        set(newVal) {
+            str = newVal;
+            obj.trigger('go')//发布事件
+        }
+    })
+
+    //订阅一个事件
+    obj.listen('go', function () {
+        p.innerText = data.str;
+        inp.value = data.str;
+    })
+
+    //数据变动
+    inp.oninput = function () {
+        data.str = this.value
+    }
+    // setInterval(function () {
+    //     data.str += 'a'
+    //
+    // }, 1000)
+
+</script>
+
+
+</body>
+</html>
