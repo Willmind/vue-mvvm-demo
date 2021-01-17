@@ -200,7 +200,112 @@ var rotate = function (matrix) {
 function reverse(num) {
     var reverseNum = (Math.abs(num) + '').split('').reverse().join('');
     //判断是否超出范围
-    return (reverseNum > Math.pow(2, 31) - 1 || reverseNum < Math.pow(2, 31)*-1) ?
+    return (reverseNum > Math.pow(2, 31) - 1 || reverseNum < Math.pow(2, 31) * -1) ?
         0 :
         num > 0 ? reverseNum : -reverseNum;
 }
+
+/**合并两个有序数组
+ *
+ * @param {number[]} nums1
+ * @param {number} m
+ * @param {number[]} nums2
+ * @param {number} n
+ * @return {void} Do not return anything, modify nums1 in-place instead.
+ */
+var merge = function (nums1, m, nums2, n) {
+    for (let i = 0; i < n; i++) {
+        nums1[m + i] = nums2[i]
+    }
+    nums1 = nums1.sort(function (a, b) {
+        return a - b
+    })
+    while (nums1.length > m + n && nums1[0] === 0) {
+        nums1.shift()
+    }
+    return nums1;
+
+};
+
+
+/**第一个错误的版本
+ *
+ * @param {function} isBadVersion()
+ * @return {function}
+ */
+var solution = function (isBadVersion) {
+    /**
+     * @param {integer} n Total versions
+     * @return {integer} The first bad version
+     */
+    return function (n) {
+        let l = 0;
+        let r = n;
+        while (l < r) {
+            let mid = Math.floor((r - l) / 2 + r)
+            if (isBadVersion(mid) === false) {
+                l = mid + 1
+
+            } else {
+                r = mid
+            }
+        }
+        return l
+
+
+    };
+};
+
+
+/** 爬楼梯
+ * @param {number} n
+ * @return {number}
+ */
+var climbStairs = function (n) {
+    if (n === 1) {
+        return 1;
+    }
+    if (n === 2) {
+        return 2;
+    }
+    if (n === 3) {
+        return 3;
+    }
+    let result = []; //用数组result保存1-n个楼梯时走路的种数
+    result[1] = 1;   //为了方便，数组下标从1开始保存数值，第n个表示n步有几种走法
+    result[2] = 2;
+    for (let i = 3; i < n + 1; i++) {
+        result[i] = result[i - 1] + result[i - 2];
+        console.log(result[i]);
+    }
+    return result[n];
+
+
+};
+
+/**买卖股票的最佳时机
+ * @param {number[]} prices
+ * @return {number}
+ */
+var maxProfit = function (prices) {
+    if (prices.length <= 1) {
+        return 0
+    }
+    let max = 0;
+    let min = prices[0];
+
+
+    for (let i = 1; i < prices.length; i++) {
+        if (prices[i] - min > max) {
+            max = prices[i] - min
+        }
+        if (min > prices[i]) {
+            min = prices[i]
+
+        }
+
+    }
+    return max;
+
+
+};

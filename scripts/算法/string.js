@@ -102,3 +102,64 @@ var strStr = function (haystack, needle) {
 
 
 };
+
+/** 有效的字母异位词
+ * @param {string} s
+ * @param {string} t
+ * @return {boolean}
+ */
+var isAnagram = function (s, t) {
+    let a = s.split('');
+    let b = s.split('');
+    if (a.sort().toString() === b.sort().toString()) {
+        return true
+    } else {
+        return false
+    }
+
+
+};
+
+/** 验证回文串 双指针
+ * @param {string} s
+ * @return {boolean}
+ */
+var isPalindrome = function (s) {
+    if (s.length === 0) return true;
+    s = s.replace(/^[0-9a-zA-Z]/g, '').toLowerCase()
+    let start = 0;
+    let end = s.length - 1;
+    while (start < end) {
+        if (s[start] !== s[end]) {
+            return false
+        }
+        start++;
+        end--;
+    }
+    return true;
+};
+
+
+/**最长公共前缀
+ * @param {string[]} strs
+ * @return {string}
+ */
+var longestCommonPrefix = function (strs) {
+    let first = strs[0];
+    let result = '';
+    if (!strs.length) {
+        return result;
+    }
+
+    for (let i = 0; i < first.length; i++) {
+        for (let j = 1; j < strs.length; j++) {
+            if (first[i] !== strs[j][i]) {
+                return result
+            }
+        }
+        result += first[i]
+
+    }
+    return result
+};
+
