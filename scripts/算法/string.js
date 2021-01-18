@@ -163,3 +163,48 @@ var longestCommonPrefix = function (strs) {
     return result
 };
 
+/**位1的个数
+ * 利用位操作技巧，每次把二进制数的最后一位1转化为0，每转化一次，num加1，
+ * 直到没有1可以转化的时候，此时二进制数为0，
+ * 转换的技巧利用位运算的与操作，
+ * 将n与(n-1)相与，因为0与任何数相与都为0，所以，n每减1，相当于将二进制中的一个1变为了0。
+ *
+ * @param {number} n - a positive integer
+ * @return {number}
+ */
+var hammingWeight = function (n) {
+    var num = 0
+    while (n !== 0) { //判断不为1的时候
+        num += 1
+        n &= (n - 1) //将n与(n-1)相与，相当于1的个数减1
+    }
+    return num
+};
+
+/** 汉明距离
+ * @param {number} x
+ * @param {number} y
+ * @return {number}
+ */
+var hammingDistance = function(x, y) {
+    var xb = x.toString(2),
+        yb = y.toString(2);
+    var xl = xb.length,
+        yl = yb.length;
+    var count = 0; // 记录不一样的个数
+
+    // 将短的字符串用 0 补齐
+    if (xl > yl) {
+        yb = Array(xl - yl + 1).join('0') + yb;
+    } else {
+        xb = Array(yl - xl + 1).join('0') + xb;
+    }
+
+    for (var i in xb) {
+        if (xb[i] !== yb[i]) {
+            count ++;
+        }
+    }
+    return count;
+};
+

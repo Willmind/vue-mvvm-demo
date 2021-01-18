@@ -53,7 +53,7 @@ function lengthOfLongestSubstring(data) {
 
 
 var singleNumber = function (nums) {
-    console.log(123);
+
     nums.sort(function (a, b) {
         return a - b
     })//排序数组
