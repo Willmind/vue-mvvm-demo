@@ -98,13 +98,14 @@ var moveZeroes = function (nums) {
             nums.splice(start, 1)
             nums.push(0)
             end--
-            continue
+            continue //跳出循环，然后保持start不变
         }
         start++;
     }
     return nums
 
 };
+
 
 
 /** 有效的数独
@@ -336,8 +337,34 @@ var fizzBuzz = function (n) {
  * @param {number[]} nums
  * @return {number}
  */
-var majorityElement = function(nums) {
-    
+var majorityElement = function (nums) {
+    nums.sort((a, b) => a - b);
+    return nums[Math.floor(nums.length / 2)]
+};
+
+/** 搜索二维矩阵 II
+ * @param {number[][]} matrix
+ * @param {number} target
+ * @return {boolean}
+ */
+var searchMatrix = function (matrix, target) {
+    if(matrix.length === 0){
+        return false;
+    }
+    let col = 0;
+    let row = matrix.length - 1;
+    while (col < matrix[0].length && row >= 0) {
+        let flag = matrix[row][col]
+        if (flag === target) {
+            return true
+        } else if (flag > target) {
+            row--
+        } else if (flag < target) {
+            col++
+        }
+    }
+    return false
 
 
 };
+

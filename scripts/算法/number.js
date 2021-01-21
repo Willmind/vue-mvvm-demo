@@ -20,7 +20,7 @@ var isPowerOfThree = function (n) {
  * @param {string} s
  * @return {number}
  */
-var romanToInt = function(s) {
+var romanToInt = function (s) {
     let result = 0;
     if (s.includes("IV") || s.includes("IX")) result -= 2;
     if (s.includes("XL") || s.includes("XC")) result -= 20;
@@ -28,19 +28,26 @@ var romanToInt = function(s) {
     for (let c of s) {
         switch (c) {
             case "I":
-                result += 1;break;
+                result += 1;
+                break;
             case "V":
-                result += 5;break;
+                result += 5;
+                break;
             case "X":
-                result += 10;break;
+                result += 10;
+                break;
             case "L":
-                result += 50;break;
+                result += 50;
+                break;
             case "C":
-                result += 100;break;
+                result += 100;
+                break;
             case "D":
-                result += 500;break;
+                result += 500;
+                break;
             case "M":
-                result += 1000;break
+                result += 1000;
+                break
         }
     }
 
@@ -52,11 +59,11 @@ var romanToInt = function(s) {
  * @param {number} n
  * @return {number}
  */
-var countPrimes = function(n) {
+var countPrimes = function (n) {
     if (n <= 1) return 0;
 
     let count = 0;
-    for (let i=2; i<n; i++) {
+    for (let i = 2; i < n; i++) {
         if (i > 3 && (i % 2 === 0 || i % 3 === 0)) continue;
         if (isPrime(i)) count++;
     }
@@ -66,10 +73,25 @@ var countPrimes = function(n) {
     function isPrime(num) {
         let p = Math.sqrt(num);
 
-        for (let i=2; i<=p; i++) {
+        for (let i = 2; i <= p; i++) {
             if (num % i === 0) return false;
         }
 
         return true;
     }
 };
+
+
+function bytesToSize(bytes) {
+    if (bytes === 0) return '0 B';
+
+    var k = 1024;
+
+    sizes = ['B', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
+
+    i = Math.floor(Math.log(bytes) / Math.log(k));
+
+    return (bytes / Math.pow(k, i)).toFixed(1) + ' ' + sizes[i];
+}
+
+console.log(bytesToSize(1073234));
