@@ -133,5 +133,26 @@ var intersect = function (nums1, nums2) {
 };
 
 
+/**两数之和 II - 输入有序数组
+ * @param {number[]} numbers
+ * @param {number} target
+ * @return {number[]}
+ */
+var twoSum = function (numbers, target) {
+    let l = 0,
+        r = numbers.length - 1,
+        sum = 0;
+
+    while (l < r) {
+        sum = numbers[l] + numbers[r];
+
+        if (sum === target) {
+            return [l + 1, r + 1];
+        }
+
+        sum < target ? l++ : r--;
+    }
+};
+
 
 
