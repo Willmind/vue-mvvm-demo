@@ -105,3 +105,44 @@ MyCircularQueue.prototype.isFull = function () {
  * var param_5 = obj.isEmpty()
  * var param_6 = obj.isFull()
  */
+
+
+/**
+ * 剑指 Offer 09. 用两个栈实现队列
+ * @constructor
+ */
+var CQueue = function () {
+    this.stack1 = []; //加
+    this.stack2 = []; //减
+
+};
+
+/**
+ * @param {number} value
+ * @return {void}
+ */
+CQueue.prototype.appendTail = function (value) {
+    this.stack1.push(value);
+};
+
+/**
+ * @return {number}
+ */
+CQueue.prototype.deleteHead = function () {
+    if (this.stack2.length) {
+        return this.stack2.pop();
+    }
+    while (this.stack1.length) {
+        this.stack2.push(this.stack1.pop());
+    }
+    return this.stack2.pop() || -1;
+
+
+};
+
+/**
+ * Your CQueue object will be instantiated and called as such:
+ * var obj = new CQueue()
+ * obj.appendTail(value)
+ * var param_2 = obj.deleteHead()
+ */

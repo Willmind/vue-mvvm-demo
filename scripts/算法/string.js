@@ -187,7 +187,7 @@ var hammingWeight = function (n) {
  * @param {number} y
  * @return {number}
  */
-var hammingDistance = function(x, y) {
+var hammingDistance = function (x, y) {
     var xb = x.toString(2),
         yb = y.toString(2);
     var xl = xb.length,
@@ -203,10 +203,12 @@ var hammingDistance = function(x, y) {
 
     for (var i in xb) {
         if (xb[i] !== yb[i]) {
-            count ++;
+            count++;
         }
     }
     return count;
 };
+
+
 
 
