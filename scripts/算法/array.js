@@ -237,20 +237,19 @@ var solution = function (isBadVersion) {
      * @param {integer} n Total versions
      * @return {integer} The first bad version
      */
-    return function (n) {
-        let l = 0;
-        let r = n;
-        while (l < r) {
-            let mid = Math.floor((r - l) / 2 + r)
-            if (isBadVersion(mid) === false) {
-                l = mid + 1
-
-            } else {
-                r = mid
+    return function(n) {
+        var left = 1
+        var right = n
+        while(left < right){
+            let mid =Math.floor(left + (right - left)/2) //floor()向下取整
+            if(isBadVersion(mid) == false){
+                left = mid + 1
+            }else{
+                right = mid
             }
-        }
-        return l
 
+        }
+        return left
 
     };
 };
