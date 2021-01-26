@@ -1,22 +1,24 @@
 /**二分查找
- *
- * @param {number[]} nums
- * @param {number} target
+ /**
+ * @param {number} x
  * @return {number}
  */
-var search = function (nums, target) {
-    let left = 0;
-    let right = nums.length - 1;
-    while (left <= right) {
-        const mid = (left + right)/2|0;
-        if (nums[mid] === target) return mid;
-        if(nums[mid]<target){
-            left=mid+1;
-        }else{
-            right=mid-1
-        }
+var mySqrt = function (x) {
+    if (x < 2) {
+        return x
     }
-    return -1;
+    let left = 0, right = x >> 1
+    while (left <= right) {
+        let mid = (left + right) >> 1
+        if (x < mid * mid) {
+            right = mid - 1
+        } else if (x > mid * mid) {
 
+        } else {
+            return mid
+        }
+
+    }
+    return right
 
 };
