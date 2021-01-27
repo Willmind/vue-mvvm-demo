@@ -170,6 +170,7 @@ var buildTree = function (inorder, postorder) {
     if(!inorder.length || !postorder.length){
         return null
     }
+
     let node = postorder.pop()//头节点
     let index = inorder.indexOf(node) //头节点在中序遍历数组中的位置
 
