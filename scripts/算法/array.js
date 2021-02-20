@@ -237,14 +237,14 @@ var solution = function (isBadVersion) {
      * @param {integer} n Total versions
      * @return {integer} The first bad version
      */
-    return function(n) {
+    return function (n) {
         var left = 1
         var right = n
-        while(left < right){
-            let mid =Math.floor(left + (right - left)/2) //floor()向下取整
-            if(isBadVersion(mid) == false){
+        while (left < right) {
+            let mid = Math.floor(left + (right - left) / 2) //floor()向下取整
+            if (isBadVersion(mid) == false) {
                 left = mid + 1
-            }else{
+            } else {
                 right = mid
             }
 
@@ -376,7 +376,7 @@ var searchMatrix = function (matrix, target) {
  * @param {number[]} nums
  * @return {number}
  */
-var minSubArrayLen = function(s, nums) {
+var minSubArrayLen = function (s, nums) {
     if (nums.length === 0) return 0;
     const slideWindow = [];
     let acc = 0;
@@ -399,7 +399,6 @@ var minSubArrayLen = function(s, nums) {
 
     return min || 0;
 };
-
 
 
 /** 翻转字符串里的单词
@@ -645,25 +644,25 @@ var findKthLargest = function (nums, k) {
  * @param {string} s
  * @return {string}
  */
-var reverseVowels = function(s) {
-    let i=0;
-    let j=s.length-1;
-    let arr=s.split('')
-    let reg=/[aeiouAEIOU]/
-    while (i<j){
-        if(!reg.test(arr[i])){
+var reverseVowels = function (s) {
+    let i = 0;
+    let j = s.length - 1;
+    let arr = s.split('')
+    let reg = /[aeiouAEIOU]/
+    while (i < j) {
+        if (!reg.test(arr[i])) {
             i++;
             continue;
         }
-        if(!reg.test(arr[j])){
+        if (!reg.test(arr[j])) {
             j--;
             continue;
         }
-        if(arr[i]!==arr[j]){
-            let a=arr[i];
-            let b=arr[j];
-            arr[j]=a;
-            arr[i]=b;
+        if (arr[i] !== arr[j]) {
+            let a = arr[i];
+            let b = arr[j];
+            arr[j] = a;
+            arr[i] = b;
         }
         i++;
         j--
@@ -679,15 +678,15 @@ var reverseVowels = function(s) {
  * @param {number[]} height
  * @return {number}
  */
-var maxArea = function(height) {
-    let i=0;
-    let j=height.length-1;
-    let max=0;
-    while (i<j){
-        max=Math.max(max,Math.min(height[i],height[j])*(j-i))
-        if(height[i]>=height[j]){
+var maxArea = function (height) {
+    let i = 0;
+    let j = height.length - 1;
+    let max = 0;
+    while (i < j) {
+        max = Math.max(max, Math.min(height[i], height[j]) * (j - i))
+        if (height[i] >= height[j]) {
             j--
-        }else{
+        } else {
             i++
         }
 
@@ -695,5 +694,81 @@ var maxArea = function(height) {
     return max;
 
 };
+
+/**逆波兰表达式求值
+ * @param {string[]} tokens
+ * @return {number}
+ *
+ * .reduce()
+ * function(total,currentValue, index,arr)
+ * total    必需。初始值, 或者计算结束后的返回值。
+ currentValue    必需。当前元素
+ currentIndex    可选。当前元素的索引
+ arr    可选。当前元素所属的数组对象。
+ *
+ *
+ */
+
+var evalRPN = function (tokens) {
+    // let h = {
+    //     '+': (a, b) => a + b,
+    //     '-': (a, b) => a - b,
+    //     '*': (a, b) => a * b,
+    //     '/': (a, b) => a / b | 0
+    // };
+    //
+    // return tokens.reduce((s, v) => (s.push(h[v] ? h[v](...s.splice(-2, 2)) : Number(v)), s), [])[0]
+
+    let stack = [];
+    let num;//由于减法和除法的存在顺序问题
+    for (let char of tokens) {
+        switch (char) {
+            case "+":
+                stack.push(stack.pop() + stack.pop());
+                break;
+            case "-":
+                num = stack.pop();
+                stack.push(stack.pop() - num);
+                break;
+            case "*":
+                stack.push(stack.pop() * stack.pop());
+                break;
+            case "/":
+                num = stack.pop();
+                stack.push(parseInt(stack.pop() / num, 10));
+                break;
+            default:
+                stack.push(parseInt(char, 10));
+        }
+    }
+    return stack.pop();
+
+};
+
+/**递增的三元子序列
+ * @param {number[]} nums
+ * @return {boolean}
+ */
+var increasingTriplet = function (nums) {
+    for (let i = 0; i < nums.length; i++) {
+        for (let j = i + 1; j < nums.length; j++) {
+            if (nums[j] - nums[i] <= 0) {
+                break
+            }
+            for (let k = j + 1; k < nums.length; k++) {
+                if (nums[k] - nums[j] > 0) {
+                    return true
+                }
+            }
+        }
+    }
+    return false
+
+
+};
+
+
+
+
 
 

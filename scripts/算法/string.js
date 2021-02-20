@@ -214,26 +214,25 @@ var hammingDistance = function (x, y) {
  * @param {number[]} nums
  * @return {number[][]}
  */
-var threeSum = function(nums) {
+var threeSum = function (nums) {
     let ans = [];
     const len = nums.length;
-    if(nums === null || len < 3) return ans;
+    if (nums === null || len < 3) return ans;
     nums.sort((a, b) => a - b); // 排序
-    for (let i = 0; i < len ; i++) {
-        if(nums[i] > 0) break; // 如果当前数字大于0，则三数之和一定大于0，所以结束循环
-        if(i > 0 && nums[i] === nums[i-1]) continue; // 去重
-        let L = i+1;
-        let R = len-1;
-        while(L < R){
+    for (let i = 0; i < len; i++) {
+        if (nums[i] > 0) break; // 如果当前数字大于0，则三数之和一定大于0，所以结束循环
+        if (i > 0 && nums[i] === nums[i - 1]) continue; // 去重
+        let L = i + 1;
+        let R = len - 1;
+        while (L < R) {
             const sum = nums[i] + nums[L] + nums[R];
-            if(sum === 0){
-                ans.push([nums[i],nums[L],nums[R]]);
-                while (L<R && nums[L] === nums[L+1]) L++; // 去重
-                while (L<R && nums[R] === nums[R-1]) R--; // 去重
+            if (sum === 0) {
+                ans.push([nums[i], nums[L], nums[R]]);
+                while (L < R && nums[L] === nums[L + 1]) L++; // 去重
+                while (L < R && nums[R] === nums[R - 1]) R--; // 去重
                 L++;
                 R--;
-            }
-            else if (sum < 0) L++;
+            } else if (sum < 0) L++;
             else if (sum > 0) R--;
         }
     }
@@ -245,7 +244,7 @@ var threeSum = function(nums) {
  * @param {string[]} strs
  * @return {string[][]}
  */
-var groupAnagrams = function(strs) {
+var groupAnagrams = function (strs) {
     if (!strs || !strs.length) return []
     const map = {};
 
@@ -263,6 +262,36 @@ var groupAnagrams = function(strs) {
     return Object.values(map)
 };
 
+/** 最长回文子串
+
+ * @param {string} s
+ * @return {string}
+ */
+var longestPalindrome = function (s) {
+    let len = s.length;
+    let result = '';
+    for (let i = 0; i < len; i++) {
+        for (let j = i + 1; j < len; j++) {
+            let str = s.slice(i, j)
+            let str2 = str.split('').reverse().join('')
+            if (str === str2) {
+                result = result.length > str.length ? result : str
+            }
+
+        }
+    }
+    return result
+
+};
+
+/** 颠倒二进制位
+ * @param {number} n - a positive integer
+ * @return {number} - a positive integer
+ */
+var reverseBits = function(n) {
+    console.log(123);
+};
+export {reverseBits};
 
 
 
